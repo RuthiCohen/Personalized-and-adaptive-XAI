@@ -1,5 +1,6 @@
 import os
 import torch
+import json
 import pandas as pd
 from errno import EEXIST
 import torch.utils.data as data
@@ -9,6 +10,15 @@ from sklearn.preprocessing import MinMaxScaler, StandardScaler
 target_label = {
     'heart_failure_clinical_records_dataset': 'DEATH_EVENT',
 }
+
+# def load_config(config_path):
+#     with open(config_path, 'r') as f:
+#         config = json.load(f)
+#     return config
+#
+# config = load_config('config.json')
+# target_label = config['target_label']
+
 class TabularDataLoader(data.Dataset):
     #todo: fixed class!!
     def __init__(self, path, filename, label, scale='minmax'):
