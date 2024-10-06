@@ -1,5 +1,8 @@
 {
-  "target_label": {
-    "heart_failure_clinical_records_dataset": "DEATH_EVENT"
+  "heart_failure_clinical_records_dataset": {
+    "target_label": "DEATH_EVENT"
+  },
+  "ggg12": {
+    "target_label": "fdsafd"
   }
 }

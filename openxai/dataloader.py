@@ -7,17 +7,12 @@ import torch.utils.data as data
 from torch.utils.data import DataLoader
 from sklearn.preprocessing import MinMaxScaler, StandardScaler
 
-target_label = {
-    'heart_failure_clinical_records_dataset': 'DEATH_EVENT',
-}
+def load_config(config_path):
+    with open(config_path, 'r') as f:
+        config = json.load(f)
+    return config
 
-# def load_config(config_path):
-#     with open(config_path, 'r') as f:
-#         config = json.load(f)
-#     return config
-#
-# config = load_config('config.json')
-# target_label = config['target_label']
+config = load_config(f'{os.path.dirname(os.path.realpath(__file__))}/config.json')
 
 class TabularDataLoader(data.Dataset):
     #todo: fixed class!!
@@ -72,11 +67,11 @@ class TabularDataLoader(data.Dataset):
 
 
 def ReturnLoaders(data_name, batch_size=32, scaler='minmax'):
-    #todo: my code
     prefix = f"data/{data_name}/"
     file_train, file_test = 'train.csv', 'test.csv'
 
-    label = target_label[data_name]
+    # label = target_label[data_name]
+    label = config[data_name]['target_label']
     dataset_train = TabularDataLoader(path=prefix,filename=file_train, label=label, scale=scaler)
     dataset_test = TabularDataLoader(path=prefix,filename=file_test, label=label, scale=scaler)
 

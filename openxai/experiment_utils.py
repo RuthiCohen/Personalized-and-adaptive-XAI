@@ -26,10 +26,12 @@ def split_to_train_test_files(data_name):
 def get_feature_names(data_name):
     data_file = f'./data/{data_name}/train.csv'
 
-    labels = {'heart_failure_clinical_records_dataset': "DEATH_EVENT"}
+    config_path = f'{os.path.dirname(os.path.realpath(__file__))}/config.json'
+    with open(config_path, 'r') as f:
+        config = json.load(f)
 
     dataset = pd.read_csv(data_file)
-    feature_names = dataset.drop(labels[data_name], axis=1).columns.to_list()
+    feature_names = dataset.drop(config[data_name]['target_label'], axis=1).columns.to_list()
 
     return feature_names
 
