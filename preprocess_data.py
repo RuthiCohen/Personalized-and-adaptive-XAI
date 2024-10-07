@@ -70,6 +70,24 @@ def get_preprocessed_data(data_name):
     #     path = f"data/{data_name}/{new_file}.csv"
     #     data = pd.read_csv(path)
 
+    # elif
+
+    elif data_name == "undergraduate_admission_test_survey_in_bangladesh":
+        file_path = f'data/{data_name}/{data_name}.csv'
+        data = pd.read_csv(file_path)
+
+        # fill empty values
+        data['HSC_GPA'].fillna(data['HSC_GPA'].mean(), inplace=True)
+
+        # create new csv file
+        new_file = f"{data_name}-new"
+        data.to_csv(f'data/{data_name}/{new_file}.csv', index=False)
+
+        split_to_train_test_files(new_file)
+
+        path = f"data/{data_name}/{new_file}.csv"
+        data = pd.read_csv(path)
+
     else: #todo
             print()
 

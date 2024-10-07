@@ -13,9 +13,10 @@ from preprocess_data import get_preprocessed_data
 import warnings; warnings.filterwarnings("ignore")
 
 if __name__ == "__main__":
-    # file_name = 'heart_failure_clinical_records_dataset'
-    file_name = 'MBA'
-    # file_name = "student_performance_factors" #todo: support the data..
+    file_name = 'heart_failure_clinical_records_dataset'
+    # file_name = 'MBA'
+    # file_name = "student_performance_factors" #todo: support this data..
+    # file_name = "undergraduate_admission_test_survey_in_bangladesh"
 
     data, path = get_preprocessed_data(file_name)
     model_kind = "ann"
@@ -25,7 +26,6 @@ if __name__ == "__main__":
 
     X_train, X_test = ReturnTrainTestX(file_name, float_tensor=True)
 
-    # learning_rate, epochs, batch_size = 0.001, 100, 32
     learning_rate, epochs, batch_size = 0.001, 100, 32
     model, best_acc, best_epoch = train_model(model_kind, file_name, learning_rate, epochs, batch_size)
 
