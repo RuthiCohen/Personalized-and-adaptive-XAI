@@ -13,16 +13,16 @@ from xai_utils import get_lime_feature_importances, get_ig_feature_importances, 
 get_shap_feature_importances, get_sg_feature_importances, \
 get_grad_feature_importances, get_itg_feature_importances
 
+from preprocess_data import get_preprocessed_data
+
 import warnings; warnings.filterwarnings("ignore")
 
 if __name__ == "__main__":
-    file_name = 'heart_failure_clinical_records_dataset'
+    # file_name = 'heart_failure_clinical_records_dataset'
+    file_name = 'MBA'
 
-    # if data is not splitted to train&test files - split them
-    split_to_train_test_files(file_name)
+    data, path = get_preprocessed_data(file_name)
 
-    path = f"data/{file_name}/{file_name}.csv"
-    data = pd.read_csv(path)
     model_kind = "ann"
 
     trainloader, testloader = ReturnLoaders(file_name)
@@ -37,8 +37,6 @@ if __name__ == "__main__":
     print(f'First 10 predictions: {preds[:10]}')
 
     features = get_feature_names(file_name)
-    # print(features)
-
 
     # XAI methods results
     lime_exps = get_lime_feature_importances(model, X_train, inputs, preds)

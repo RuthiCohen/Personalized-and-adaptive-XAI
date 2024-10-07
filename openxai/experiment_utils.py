@@ -13,13 +13,18 @@ from tabulate import tabulate
 tqdm.__init__ = partialmethod(tqdm.__init__, disable=True)
 
 def split_to_train_test_files(data_name):
-    path = f'./data/{data_name}'
+
+    # if file is preprocessed before
+    dir_name = data_name.replace("-new", "")
+
+    path = f'./data/{dir_name}'
     data = pd.read_csv(path + f'/{data_name}.csv')
     train_percentage = 0.7
-    msk = np.random.rand(len(data)) <= train_percentage  # 70% train, 30% test
+    split_index = int(len(data) * train_percentage)
 
-    train = data[msk]
-    test = data[~msk]
+    # Split the data without randomization
+    train = data[:split_index]  # First 70%
+    test = data[split_index:]  # Remaining 30%
 
     train.to_csv(path + '/train.csv', index=False)
     test.to_csv(path + '/test.csv', index=False)
