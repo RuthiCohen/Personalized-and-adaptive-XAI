@@ -15,7 +15,6 @@ def load_config(config_path):
 config = load_config(f'{os.path.dirname(os.path.realpath(__file__))}/config.json')
 
 class TabularDataLoader(data.Dataset):
-    #todo: fixed class!!
     def __init__(self, path, filename, label, scale='minmax'):
         self.dataset = pd.read_csv(path + filename)
         self.target = label
@@ -82,7 +81,6 @@ def ReturnLoaders(data_name, batch_size=32, scaler='minmax'):
 
 
 def ReturnTrainTestX(data_name, n_test=None, n_train=None, float_tensor=False):
-    #todo: my code
     trainloader, testloader = ReturnLoaders(data_name)
     X_test = testloader.dataset.data[:n_test] if n_test is not None else testloader.dataset.data
     X_train = trainloader.dataset.data[:n_train] if n_train is not None else trainloader.dataset.data

@@ -1,8 +1,3 @@
-# todo: wrap all xai methods in functions
-# todo: write a config file with all data of datasets(also in dataloader.py)
-# todo: upload files to github :)
-
-import pandas as pd
 from openxai.model import train_model
 
 from openxai.experiment_utils import plot_feature_importance, \
@@ -20,9 +15,9 @@ import warnings; warnings.filterwarnings("ignore")
 if __name__ == "__main__":
     # file_name = 'heart_failure_clinical_records_dataset'
     file_name = 'MBA'
+    # file_name = "student_performance_factors" #todo: support the data..
 
     data, path = get_preprocessed_data(file_name)
-
     model_kind = "ann"
 
     trainloader, testloader = ReturnLoaders(file_name)
@@ -30,6 +25,7 @@ if __name__ == "__main__":
 
     X_train, X_test = ReturnTrainTestX(file_name, float_tensor=True)
 
+    # learning_rate, epochs, batch_size = 0.001, 100, 32
     learning_rate, epochs, batch_size = 0.001, 100, 32
     model, best_acc, best_epoch = train_model(model_kind, file_name, learning_rate, epochs, batch_size)
 

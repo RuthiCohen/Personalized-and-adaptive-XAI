@@ -4,5 +4,8 @@
   },
   "MBA": {
     "target_label": "admission"
+  },
+  "student_performance_factors": {
+    "target_label": "Exam_Score"
   }
 }

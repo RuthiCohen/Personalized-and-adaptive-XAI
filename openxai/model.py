@@ -136,7 +136,6 @@ class ArtificialNeuralNetwork(nn.Module):
 
 def train_model(model_name, dataset, learning_rate, epochs, batch_size, scaler='minmax', seed=0,
                 pos_class_weight=0.5, mean_prediction_bound=1.0, warmup=5, verbose=False):
-    #todo: my code
     """
     Train a (binary classificaiton) model
     :param model_name: string with abbreviated name of model; 'lr' or 'ann'
@@ -153,8 +152,8 @@ def train_model(model_name, dataset, learning_rate, epochs, batch_size, scaler='
     :return: trained model, best accuracy, best epoch
     """
     # Dataloaders
-    file_path = f'./data/{dataset}/'
-    all_splits_downloaded = os.path.exists(file_path + 'train.csv') and os.path.exists(file_path + 'test.csv')
+    # file_path = f'./data/{dataset}/'
+    # all_splits_downloaded = os.path.exists(file_path + 'train.csv') and os.path.exists(file_path + 'test.csv')
     trainloader, testloader = ReturnLoaders(dataset, batch_size, scaler)
     input_size = trainloader.dataset.data.shape[-1]
     loaders = {'train': trainloader, 'test': testloader}

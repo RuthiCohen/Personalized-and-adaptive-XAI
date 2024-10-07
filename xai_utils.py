@@ -12,7 +12,7 @@ def get_lime_feature_importances(model, X_train, inputs, preds):
     # Pass empty dict to use default parameters
     param_dict = {}
 
-    # # If LIME/IG, then provide X_train
+    # If LIME/IG, then provide X_train
     param_dict = fill_param_dict(method, {}, X_train)
     params_preview = [f'{k}: array of size {v.shape}' if hasattr(v, 'shape') else f'{k}: {v}' for k, v in
                       param_dict.items()]
