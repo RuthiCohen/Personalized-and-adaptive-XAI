@@ -192,7 +192,6 @@ def train_model(model_name, dataset, learning_rate, epochs, batch_size, scaler='
 
                 with torch.set_grad_enabled(phase == 'train'):
                     y_pred = model(inputs.float())
-                    print(y_pred, "-----\n", labels)
                     loss = criterion(y_pred, labels)
                     if phase == 'train':
                         loss.backward()

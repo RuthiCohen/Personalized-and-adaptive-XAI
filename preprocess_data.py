@@ -99,6 +99,15 @@ def get_preprocessed_data(data_name):
             data[column] = lb.fit_transform(data[column])
             label_encoders[column] = lb
 
+    elif data_name == "2017_2020_bmi":
+        # split data
+        split_to_train_test_files(data_name)
+
+        path = f"data/{data_name}/{data_name}.csv"
+        data = pd.read_csv(path)
+
+        # rename categorical column specific labels
+        data['yr'] = data['yr'].replace({'19-44': 32, '45-64': 55, '65+': 65})
 
     else: #todo
             print()

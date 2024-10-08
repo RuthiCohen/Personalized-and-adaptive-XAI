@@ -13,5 +13,8 @@
   },
   "car_price_prediction": {
     "target_label": "Model"
+  },
+  "2017_2020_bmi": {
+    "target_label": "gender"
   }
 }
