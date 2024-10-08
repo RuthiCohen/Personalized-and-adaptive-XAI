@@ -10,5 +10,8 @@
   },
   "undergraduate_admission_test_survey_in_bangladesh":{
     "target_label": "University"
+  },
+  "car_price_prediction": {
+    "target_label": "Model"
   }
 }

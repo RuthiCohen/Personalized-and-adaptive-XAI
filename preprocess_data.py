@@ -6,12 +6,14 @@ import warnings; warnings.filterwarnings("ignore")
 
 def get_preprocessed_data(data_name):
     if data_name == 'heart_failure_clinical_records_dataset':
-
         # split data
         split_to_train_test_files(data_name)
 
         path = f"data/{data_name}/{data_name}.csv"
         data = pd.read_csv(path)
+
+        return data, path
+
     elif data_name == 'MBA':
         file_path = f'data/{data_name}/{data_name}.csv'
         data = pd.read_csv(file_path)
@@ -30,15 +32,6 @@ def get_preprocessed_data(data_name):
         le = LabelEncoder()
         for cols in columns:
             data[cols] = le.fit_transform(data[cols])
-
-        # create new csv file
-        new_file = f"{data_name}-new"
-        data.to_csv(f'data/{data_name}/{new_file}.csv', index=False)
-
-        split_to_train_test_files(new_file)
-
-        path = f"data/{data_name}/{new_file}.csv"
-        data = pd.read_csv(path)
 
     # elif data_name == "student_performance_factors":
     #     file_path = f'data/{data_name}/{data_name}.csv'
@@ -79,16 +72,44 @@ def get_preprocessed_data(data_name):
         # fill empty values
         data['HSC_GPA'].fillna(data['HSC_GPA'].mean(), inplace=True)
 
-        # create new csv file
-        new_file = f"{data_name}-new"
-        data.to_csv(f'data/{data_name}/{new_file}.csv', index=False)
+    elif data_name == "car_price_prediction":
+        file_path = f'data/{data_name}/{data_name}.csv'
+        data = pd.read_csv(file_path)
 
-        split_to_train_test_files(new_file)
+        # delete irrlevant column
+        data = data.drop('Car ID', axis=1)
 
-        path = f"data/{data_name}/{new_file}.csv"
-        data = pd.read_csv(path)
+        # update columns
+        data['age'] = 2024 - data['Year']
+        data = data.drop('Year', axis=1)
+
+        data['Condition'] = data['Condition'].replace('Like New', 'New')
+
+        # categorical columns
+        categorical_columns = ['Brand', 'Fuel Type', 'Transmission', 'Condition']
+        data = pd.get_dummies(data, columns=categorical_columns)
+
+        for i in data.columns:
+            if data[i].dtype == bool:
+                data[i] = data[i].astype(int)
+
+        label_encoders = {}
+        for column in ["Model"]:
+            lb = LabelEncoder()
+            data[column] = lb.fit_transform(data[column])
+            label_encoders[column] = lb
+
 
     else: #todo
             print()
+
+    # create new csv file
+    new_file = f"{data_name}-new"
+    data.to_csv(f'data/{data_name}/{new_file}.csv', index=False)
+
+    split_to_train_test_files(new_file)
+
+    path = f"data/{data_name}/{new_file}.csv"
+    data = pd.read_csv(path)
 
     return data, path

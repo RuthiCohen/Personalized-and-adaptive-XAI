@@ -9,6 +9,8 @@ from functools import partialmethod
 import pandas as pd
 import matplotlib.pyplot as plt
 from tabulate import tabulate
+import warnings; warnings.filterwarnings("ignore")
+
 
 tqdm.__init__ = partialmethod(tqdm.__init__, disable=True)
 

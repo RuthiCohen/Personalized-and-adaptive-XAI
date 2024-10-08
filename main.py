@@ -13,10 +13,11 @@ from preprocess_data import get_preprocessed_data
 import warnings; warnings.filterwarnings("ignore")
 
 if __name__ == "__main__":
-    file_name = 'heart_failure_clinical_records_dataset'
+    # file_name = 'heart_failure_clinical_records_dataset'
     # file_name = 'MBA'
     # file_name = "student_performance_factors" #todo: support this data..
     # file_name = "undergraduate_admission_test_survey_in_bangladesh"
+    file_name = "car_price_prediction" #todo: support this data..
 
     data, path = get_preprocessed_data(file_name)
     model_kind = "ann"
