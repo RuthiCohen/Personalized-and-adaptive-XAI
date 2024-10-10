@@ -16,5 +16,8 @@
   },
   "2017_2020_bmi": {
     "target_label": "gender"
+  },
+  "healthcare_noshows_appointments": {
+    "target_label": "Showed_up"
   }
 }
